@@ -15,13 +15,9 @@ namespace LightsOut
         [STAThread]
         static void Main()
         {
-            // Container
-            Debug.WriteLine("ON EST AVANT");
             HttpClient client = new();
             HttpService httpService = new(client);
             Settings setting = httpService.GetSettings().Result;
-            Debug.WriteLine("ON EST APRES LE GET LA OLALA");
-            Debug.WriteLine(setting);
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();

@@ -25,7 +25,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Settings>>> GetSettings()
         {
-            return await _context.Settings.ToListAsync();
+            return await _context.Settings.ToArrayAsync();
         }
 
         // GET: api/Settings/5

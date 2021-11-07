@@ -34,9 +34,9 @@ namespace LightsOut
             // 
             // tablePanel
             // 
-            this.tablePanel.BackColor = System.Drawing.Color.DimGray;
+            this.tablePanel.BackColor = System.Drawing.Color.Gray;
             this.tablePanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
-            this.tablePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePanel.Dock = System.Windows.Forms.DockStyle.Fill;   
             this.tablePanel.Location = new System.Drawing.Point(0, 0);
             this.tablePanel.Name = "tablePanel";
             this.tablePanel.Size = new System.Drawing.Size(584, 561);

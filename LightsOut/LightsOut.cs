@@ -21,11 +21,13 @@ namespace LightsOut
             bgColors = new Color[gridSizeX, gridSizeY];
 
             InitializeComponent();
-            InitTable(gridSizeX, gridSizeY);
-            InitBackgroundColor(gridSizeX, gridSizeY);
+            InitTable();
+            InitBackgroundColor();
+            InitGrid();
+            updateDisplay();
         }
 
-        private void InitTable(int gridSizeX, int gridSizeY)
+        private void InitTable()
         {
             tablePanel.ColumnCount = gridSizeX;
             tablePanel.RowCount = gridSizeY;
@@ -40,7 +42,7 @@ namespace LightsOut
             }
         }
 
-        private void InitBackgroundColor(int gridSizeX, int gridSizeY)
+        private void InitBackgroundColor()
         {
             for (int i = 0; i < gridSizeX; i++)
             {
@@ -48,6 +50,20 @@ namespace LightsOut
                 {
                     this.bgColors[i, j] = SystemColors.Control;
                 }
+            }
+        }
+
+        private void InitGrid()
+        {
+            int nbLightedUpCells = (gridSizeX + gridSizeY)/2;
+            Random rand = new();
+
+            for (int i = 0; i < nbLightedUpCells; i++)
+            {
+                int randX = rand.Next(gridSizeX);
+                int randY = rand.Next(gridSizeY);
+                if (grid[randX + 1, randY + 1]) i--;
+                grid[randX + 1, randY + 1] = true;
             }
         }
 
@@ -81,15 +97,18 @@ namespace LightsOut
             grid[x - 1, y] = !grid[x - 1, y];
             grid[x, y + 1] = !grid[x, y + 1];
             grid[x, y - 1] = !grid[x, y - 1];
+        }
 
+        private void updateDisplay()
+        {
             for (int i = 0; i < gridSizeX; i++)
             {
                 for (int j = 0; j < gridSizeY; j++)
                 {
-                    if(grid[i+1, j+1])
+                    if (grid[i + 1, j + 1])
                     {
                         bgColors[i, j] = Color.Green;
-                    } 
+                    }
                     else
                     {
                         bgColors[i, j] = Color.Gray;
@@ -128,6 +147,7 @@ namespace LightsOut
                 tablePanel,
                 tablePanel.PointToClient(Cursor.Position));
             UpdateGrid(x, y);
+            updateDisplay();
             if (WinConCheck())
             {
                 MessageBox.Show("You won!");
