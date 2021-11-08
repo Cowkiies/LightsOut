@@ -8,14 +8,14 @@ namespace LightsOut
 {
     public partial class LightsOut : Form
     {
-        private readonly Boolean[,] grid;
+        public Boolean[,] Grid { get; }
         private readonly int gridSizeX;
         private readonly int gridSizeY;
-        private readonly Color[,] bgColors;
+        private Color[,] bgColors { get; }
 
         public LightsOut(int gridSizeX, int gridSizeY)
         {
-            grid = new Boolean[gridSizeX + 2, gridSizeY + 2];
+            Grid = new Boolean[gridSizeX + 2, gridSizeY + 2];
             this.gridSizeX = gridSizeX;
             this.gridSizeY = gridSizeY;
             bgColors = new Color[gridSizeX, gridSizeY];
@@ -62,8 +62,8 @@ namespace LightsOut
             {
                 int randX = rand.Next(gridSizeX);
                 int randY = rand.Next(gridSizeY);
-                if (grid[randX + 1, randY + 1]) i--;
-                grid[randX + 1, randY + 1] = true;
+                if (Grid[randX + 1, randY + 1]) i--;
+                Grid[randX + 1, randY + 1] = true;
             }
         }
 
@@ -92,11 +92,11 @@ namespace LightsOut
 
         private void UpdateGrid(int x, int y)
         {            
-            grid[x, y] = !grid[x, y];
-            grid[x + 1, y] = !grid[x + 1, y];
-            grid[x - 1, y] = !grid[x - 1, y];
-            grid[x, y + 1] = !grid[x, y + 1];
-            grid[x, y - 1] = !grid[x, y - 1];
+            Grid[x, y] = !Grid[x, y];
+            Grid[x + 1, y] = !Grid[x + 1, y];
+            Grid[x - 1, y] = !Grid[x - 1, y];
+            Grid[x, y + 1] = !Grid[x, y + 1];
+            Grid[x, y - 1] = !Grid[x, y - 1];
         }
 
         private void updateDisplay()
@@ -105,7 +105,7 @@ namespace LightsOut
             {
                 for (int j = 0; j < gridSizeY; j++)
                 {
-                    if (grid[i + 1, j + 1])
+                    if (Grid[i + 1, j + 1])
                     {
                         bgColors[i, j] = Color.Green;
                     }
@@ -118,14 +118,14 @@ namespace LightsOut
             tablePanel.Refresh();
         }
 
-        private Boolean WinConCheck()
+        public Boolean WinConCheck()
         {
             Boolean isGameWon = true;
             for (int i = 1; i < gridSizeX + 1; i++)
             {
                 for (int j = 1; j < gridSizeY + 1; j++)
                 {
-                    if(!grid[i, j])
+                    if(!Grid[i, j])
                     {
                         isGameWon = false;
                     }
