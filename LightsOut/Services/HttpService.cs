@@ -15,7 +15,7 @@ namespace LightsOut
 
         public HttpService(HttpClient httpClient) => _httpClient = httpClient;
 
-        public async Task<Settings> GetSettings()
+        public async Task<Settings> GetSettings(string difficulty)
         {
             Settings setting;
             try
@@ -23,7 +23,7 @@ namespace LightsOut
                 _httpClient.BaseAddress = new Uri("https://localhost:44377/");
                 _httpClient.DefaultRequestHeaders.Accept.Clear();
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                string response = await _httpClient.GetStringAsync("/api/settings/1");
+                string response = await _httpClient.GetStringAsync($"/api/settings/{difficulty}");
                 Debug.WriteLine(response);
                 setting = JsonSerializer.Deserialize<Settings>(response);
             }

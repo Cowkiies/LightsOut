@@ -17,11 +17,16 @@ namespace LightsOut
         {
             HttpClient client = new();
             HttpService httpService = new(client);
-            Settings setting = httpService.GetSettings().Result;
 
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            DifficultyPicker DifficultyPicker = new();
+            Application.Run(DifficultyPicker);
+
+            Settings setting = httpService.GetSettings(DifficultyPicker.chosenDifficulty).Result;
+
             Application.Run(new LightsOut(setting.GridSizeX, setting.GridSizeY));
         }
     }
