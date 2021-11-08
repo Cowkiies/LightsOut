@@ -7,7 +7,7 @@ namespace LightsOut
 {
     public partial class DifficultyPicker : Form
     {
-        public string chosenDifficulty;
+        public string chosenDifficulty = "1";
         public DifficultyPicker()
         {
             InitializeComponent();
