@@ -1,6 +1,6 @@
 # LightsOut
 
-This project was generated with Visual Studio.
+This project was generated with Visual Studio and .Net 5.0.
 
 ## Use the project
 
